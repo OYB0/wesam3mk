@@ -1,41 +1,34 @@
+-- إنشاء ال GUI
 local gui = Instance.new("ScreenGui")
-gui.Name = "MyGui"
 gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- إعداد مظهر GUI
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 400, 0, 200)
-frame.Position = UDim2.new(0.5, -200, 0.5, -100)
-frame.BackgroundColor3 = Color3.new(0, 0, 1) -- لون أزرق سماوي
-frame.BorderSizePixel = 5
-frame.BorderColor3 = Color3.new(1, 1, 1) -- لون الحدود
+frame.Size = UDim2.new(0.6, 0, 0.4, 0)
+frame.Position = UDim2.new(0.2, 0, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 128) -- اللون الأزرق السماوي
+frame.BorderSizePixel = 0
+frame.Parent = gui
 
--- إضافة نص
+-- إضافة نص إلى ال GUI
 local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 0.5, 0)
-textLabel.Text = "مرحبًا بك في مابي"
-textLabel.TextColor3 = Color3.new(0, 0, 0) -- لون النص أسود
+textLabel.Text = "مرحبًا بك في اللون الأسود"
+textLabel.Size = UDim2.new(1, 0, 0.8, 0)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundColor3 = Color3.new(0, 0, 0) -- لون الخلفية الأسود
+textLabel.TextColor3 = Color3.new(1, 1, 1) -- لون النص أبيض
 textLabel.FontSize = Enum.FontSize.Size24
-textLabel.FontWeight = Enum.FontWeight.Bold
+textLabel.Parent = frame
 
--- إضافة زر لإغلاق GUI
+-- إضافة زر للإغلاق
 local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0.2, 0, 0.1, 0)
-closeButton.Position = UDim2.new(0.4, 0, 0.8, 0)
 closeButton.Text = "إغلاق"
-closeButton.BackgroundColor3 = Color3.new(1, 0, 0) -- لون أحمر
-closeButton.BorderSizePixel = 3
-closeButton.BorderColor3 = Color3.new(1, 1, 1) -- لون الحدود
+closeButton.Size = UDim2.new(0.4, 0, 0.1, 0)
+closeButton.Position = UDim2.new(0.3, 0, 0.9, 0)
+closeButton.BackgroundColor3 = Color3.new(255, 0, 0) -- اللون الأحمر
+closeButton.BorderSizePixel = 0
+closeButton.Parent = frame
 
--- إعداد الزر لإخفاء ال GUI
+-- إضافة السكربت لإخفاء ال GUI عند النقر على الزر
 closeButton.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
-
--- تشغيل السكربت
-loadstring(game:HttpGet("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287"))()
-
--- إضافة العناصر إلى ال GUI
-textLabel.Parent = frame
-closeButton.Parent = frame
-frame.Parent = gui
