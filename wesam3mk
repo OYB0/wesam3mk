@@ -1,24 +1,53 @@
-local function sendMessage(message)
-    local ChatService = game:GetService("Chat")
-    local players = game.Players:GetPlayers()
+local function createNotification(title, description)
+    local player = game.Players.LocalPlayer
 
-    for _, player in ipairs(players) do
-        ChatService:Chat(player, message, Enum.ChatColor.White)
-    end
+    -- إنشاء إطار الإشعار
+    local notificationFrame = Instance.new("Frame")
+    notificationFrame.Name = "NotificationFrame"
+    notificationFrame.Position = UDim2.new(0, 10, 1, -110)
+    notificationFrame.Size = UDim2.new(0, 300, 0, 100)
+    notificationFrame.BackgroundTransparency = 0.5
+    notificationFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+    notificationFrame.BorderSizePixel = 0
+    notificationFrame.Parent = player.PlayerGui
+
+    -- إنشاء عنوان الإشعار
+    local titleTextLabel = Instance.new("TextLabel")
+    titleTextLabel.Name = "TitleTextLabel"
+    titleTextLabel.Text = title
+    titleTextLabel.TextSize = 20
+    titleTextLabel.TextColor3 = Color3.new(1, 1, 1)
+    titleTextLabel.Size = UDim2.new(1, 0, 0.5, 0)
+    titleTextLabel.Parent = notificationFrame
+
+    -- إنشاء وصف الإشعار
+    local descriptionTextLabel = Instance.new("TextLabel")
+    descriptionTextLabel.Name = "DescriptionTextLabel"
+    descriptionTextLabel.Text = description
+    descriptionTextLabel.TextWrapped = true
+    descriptionTextLabel.TextSize = 14
+    descriptionTextLabel.TextColor3 = Color3.new(1, 1, 1)
+    descriptionTextLabel.Position = UDim2.new(0, 0, 0.5, 0)
+    descriptionTextLabel.Size = UDim2.new(1, 0, 0.5, 0)
+    descriptionTextLabel.Parent = notificationFrame
+
+    -- إنشاء زر الإغلاق
+    local closeButton = Instance.new("TextButton")
+    closeButton.Name = "CloseButton"
+    closeButton.Text = "إغلاق"
+    closeButton.Size = UDim2.new(1, 0, 0, 30)
+    closeButton.Position = UDim2.new(0, 0, 1, -30)
+    closeButton.BackgroundTransparency = 0.7
+    closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
+    closeButton.BorderSizePixel = 0
+    closeButton.TextColor3 = Color3.new(1, 1, 1)
+    closeButton.Parent = notificationFrame
+
+    -- إضافة دالة لعند النقر على زر الإغلاق
+    closeButton.MouseButton1Click:Connect(function()
+        notificationFrame:Destroy()
+    end)
 end
 
--- دالة لتنفيذ السكربت
-local function executeScript(scriptUrl)
-    loadstring(game:HttpGet(scriptUrl))()
-end
-
--- الرسالة التي تريد إرسالها
-local welcomeMessage = "مرحباً بك في مابي!"
-
--- إرسال الرسالة عشر مرات
-for i = 1, 10 do
-    sendMessage(welcomeMessage)
-end
-
--- تنفيذ السكربت
-executeScript("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287")
+-- إنشاء الإشعار عند تنفيذ السكربت
+createNotification("هلا", "مرحبا بك في مابي!")
