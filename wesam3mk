@@ -11,7 +11,7 @@ frame.Parent = gui
 
 -- إضافة نص إلى ال GUI
 local textLabel = Instance.new("TextLabel")
-textLabel.Text = "صنع هاذا السكربت بواسطه BT, Tele: oyb_0"
+textLabel.Text = "مرحبًا بك في اللون الأسود"
 textLabel.Size = UDim2.new(1, 0, 0.8, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
 textLabel.BackgroundColor3 = Color3.new(0, 0, 0) -- لون الخلفية الأسود
@@ -28,9 +28,9 @@ closeButton.BackgroundColor3 = Color3.new(255, 0, 0) -- اللون الأحمر
 closeButton.BorderSizePixel = 0
 closeButton.Parent = frame
 
-loadstring(game:HttpGet("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287"))()
-
 -- إضافة السكربت لإخفاء ال GUI عند النقر على الزر
 closeButton.MouseButton1Click:Connect(function()
     gui:Destroy()
+    -- تشغيل السكربت بعد إغلاق ال GUI
+    loadstring(game:HttpGet("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287"))()
 end)
