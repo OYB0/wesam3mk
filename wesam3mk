@@ -11,7 +11,7 @@ frame.Parent = gui
 
 -- إضافة نص إلى ال GUI
 local textLabel = Instance.new("TextLabel")
-textLabel.Text = "مرحبًا بك في اللون الأسود"
+textLabel.Text = "هلا نورت ياحبي, tele: OYB_0"
 textLabel.Size = UDim2.new(1, 0, 0.8, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
 textLabel.BackgroundColor3 = Color3.new(0, 0, 0) -- لون الخلفية الأسود
@@ -21,7 +21,7 @@ textLabel.Parent = frame
 
 -- إضافة زر للإغلاق
 local closeButton = Instance.new("TextButton")
-closeButton.Text = "إغلاق"
+closeButton.Text = "تشغيل السكربت"
 closeButton.Size = UDim2.new(0.4, 0, 0.1, 0)
 closeButton.Position = UDim2.new(0.3, 0, 0.9, 0)
 closeButton.BackgroundColor3 = Color3.new(255, 0, 0) -- اللون الأحمر
