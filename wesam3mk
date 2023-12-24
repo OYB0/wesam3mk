@@ -1,3 +1,4 @@
+-- تعريف الـ GUI
 local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.Name = "CustomGUI"
@@ -21,6 +22,14 @@ local function setupButton(button, buttonColor)
     button.Size = UDim2.new(0, 100, 0, 50)
 end
 
+-- دالة لعمل ريسيت للشخصية
+local function resetCharacter()
+    local character = player.Character
+    if character then
+        character:BreakJoints()
+    end
+end
+
 -- إنشاء مربع الـ GUI
 local frame = Instance.new("Frame")
 frame.BackgroundColor3 = guiSettings.backgroundColor
@@ -36,7 +45,7 @@ setupButton(resetButton, guiSettings.buttonColor)
 
 -- إضافة دالة لعند النقر على زر الـ Reset
 resetButton.MouseButton1Click:Connect(function()
-    -- قم بوضع الكود الذي تريده لعمل reset هنا
+    resetCharacter()
 end)
 
 -- إضافة زر الـ X لإغلاق الـ GUI
