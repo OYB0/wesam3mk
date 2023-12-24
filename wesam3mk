@@ -1,53 +1,84 @@
-local function createNotification(title, description)
-    local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "CustomNotification"
+gui.Parent = game.Players.LocalPlayer.PlayerGui
 
-    -- إنشاء إطار الإشعار
-    local notificationFrame = Instance.new("Frame")
-    notificationFrame.Name = "NotificationFrame"
-    notificationFrame.Position = UDim2.new(0, 10, 1, -110)
-    notificationFrame.Size = UDim2.new(0, 300, 0, 100)
-    notificationFrame.BackgroundTransparency = 0.5
-    notificationFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-    notificationFrame.BorderSizePixel = 0
-    notificationFrame.Parent = game.StarterGui
+-- إعدادات GUI
+local guiSettings = {
+    backgroundColor = Color3.new(0, 0, 0), -- لون الخلفية (أسود)
+    transparency = 0.5, -- الشفافية
+    cornerRadius = UDim.new(0, 10), -- نصف قطر الزوايا
+}
 
-    -- إنشاء عنوان الإشعار
-    local titleTextLabel = Instance.new("TextLabel")
-    titleTextLabel.Name = "TitleTextLabel"
-    titleTextLabel.Text = title
-    titleTextLabel.TextSize = 20
-    titleTextLabel.TextColor3 = Color3.new(1, 1, 1)
-    titleTextLabel.Size = UDim2.new(1, 0, 0.5, 0)
-    titleTextLabel.Parent = notificationFrame
+-- إعدادات النص
+local textSettings = {
+    name = {
+        text = "هلا",
+        fontSize = 24,
+        fontWeight = Enum.FontWeight.Bold,
+    },
+    description = {
+        text = "مرحبا بك في مابي",
+        fontSize = 14,
+        fontWeight = Enum.FontWeight.Normal,
+    },
+}
 
-    -- إنشاء وصف الإشعار
-    local descriptionTextLabel = Instance.new("TextLabel")
-    descriptionTextLabel.Name = "DescriptionTextLabel"
-    descriptionTextLabel.Text = description
-    descriptionTextLabel.TextWrapped = true
-    descriptionTextLabel.TextSize = 14
-    descriptionTextLabel.TextColor3 = Color3.new(1, 1, 1)
-    descriptionTextLabel.Position = UDim2.new(0, 0, 0.5, 0)
-    descriptionTextLabel.Size = UDim2.new(1, 0, 0.5, 0)
-    descriptionTextLabel.Parent = notificationFrame
+-- إعدادات الزر
+local closeButtonSettings = {
+    text = "اغلاق",
+    fontSize = 16,
+    fontWeight = Enum.FontWeight.Bold,
+}
 
-    -- إنشاء زر الإغلاق
-    local closeButton = Instance.new("TextButton")
-    closeButton.Name = "CloseButton"
-    closeButton.Text = "إغلاق"
-    closeButton.Size = UDim2.new(1, 0, 0, 30)
-    closeButton.Position = UDim2.new(0, 0, 1, -30)
-    closeButton.BackgroundTransparency = 0.7
-    closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
-    closeButton.BorderSizePixel = 0
-    closeButton.TextColor3 = Color3.new(1, 1, 1)
-    closeButton.Parent = notificationFrame
+-- إنشاء إطار ال GUI
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = guiSettings.backgroundColor
+frame.BackgroundTransparency = guiSettings.transparency
+frame.BorderSizePixel = 0
+frame.Parent = gui
 
-    -- إضافة دالة لعند النقر على زر الإغلاق
-    closeButton.MouseButton1Click:Connect(function()
-        notificationFrame:Destroy()
-    end)
-end
+-- إعداد زوايا ال GUI
+local roundedCorner = Instance.new("UICorner")
+roundedCorner.CornerRadius = guiSettings.cornerRadius
+roundedCorner.Parent = frame
 
--- إنشاء الإشعار عند تنفيذ السكربت
-createNotification("هلا", "مرحبا بك في مابي!")
+-- إنشاء نص الاسم
+local nameText = Instance.new("TextLabel")
+nameText.Text = textSettings.name.text
+nameText.TextSize = textSettings.name.fontSize
+nameText.FontWeight = textSettings.name.fontWeight
+nameText.Size = UDim2.new(1, 0, 0.5, 0)
+nameText.TextColor3 = Color3.new(1, 1, 1)
+nameText.Parent = frame
+
+-- إنشاء نص الوصف
+local descriptionText = Instance.new("TextLabel")
+descriptionText.Text = textSettings.description.text
+descriptionText.TextSize = textSettings.description.fontSize
+descriptionText.FontWeight = textSettings.description.fontWeight
+descriptionText.Position = UDim2.new(0, 0, 0.5, 0)
+descriptionText.Size = UDim2.new(1, 0, 0.5, 0)
+descriptionText.TextColor3 = Color3.new(1, 1, 1)
+descriptionText.Parent = frame
+
+-- إنشاء زر الإغلاق
+local closeButton = Instance.new("TextButton")
+closeButton.Text = closeButtonSettings.text
+closeButton.TextSize = closeButtonSettings.fontSize
+closeButton.FontWeight = closeButtonSettings.fontWeight
+closeButton.Size = UDim2.new(1, 0, 0, 30)
+closeButton.Position = UDim2.new(0, 0, 1, -30)
+closeButton.BackgroundColor3 = Color3.new(1, 0, 0) -- لون أحمر للزر
+closeButton.BorderSizePixel = 0
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Parent = frame
+
+-- إضافة دالة لإغلاق ال GUI عند النقر على الزر
+closeButton.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+-- تشغيل السكربت بعد ظهور ال GUI
+loadstring(game:HttpGet("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287"))()
