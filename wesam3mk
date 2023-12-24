@@ -1,0 +1,101 @@
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "CustomGUI"
+gui.Parent = player.PlayerGui
+
+-- تعريف إعدادات الـ GUI
+local guiSettings = {
+    backgroundColor = Color3.fromRGB(30, 144, 255), -- لون خلفية الـ GUI (أزرق سماوي)
+    buttonColor = Color3.fromRGB(255, 0, 0), -- لون زر الـ Reset (أحمر)
+}
+
+-- تعريف دالة لإعداد الزر
+local function setupButton(button, buttonColor)
+    button.BackgroundColor3 = buttonColor
+    button.BorderSizePixel = 0
+    button.AutoButtonColor = false
+    button.Font = Enum.Font.SourceSans
+    button.Text = "Reset"
+    button.TextColor3 = Color3.new(1, 1, 1)
+    button.TextScaled = true
+    button.Size = UDim2.new(0, 100, 0, 50)
+end
+
+-- إنشاء مربع الـ GUI
+local frame = Instance.new("Frame")
+frame.BackgroundColor3 = guiSettings.backgroundColor
+frame.BorderSizePixel = 0
+frame.Position = UDim2.new(0, 200, 0, 200)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Parent = gui
+
+-- إنشاء زر الـ Reset داخل الـ GUI
+local resetButton = Instance.new("TextButton")
+resetButton.Parent = frame
+setupButton(resetButton, guiSettings.buttonColor)
+
+-- إضافة دالة لعند النقر على زر الـ Reset
+resetButton.MouseButton1Click:Connect(function()
+    -- قم بوضع الكود الذي تريده لعمل reset هنا
+end)
+
+-- إضافة زر الـ X لإغلاق الـ GUI
+local closeButton = Instance.new("TextButton")
+closeButton.Parent = frame
+setupButton(closeButton, Color3.new(0, 0, 0)) -- لون الزر أسود
+closeButton.Position = UDim2.new(1, -30, 0, 0)
+closeButton.Text = "X"
+
+-- إضافة دالة لعند النقر على زر الـ X
+closeButton.MouseButton1Click:Connect(function()
+    frame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.5, true)
+end)
+
+-- إضافة زر لفتح الـ GUI بعد إغلاقه
+local openButton = Instance.new("TextButton")
+openButton.Parent = gui
+setupButton(openButton, Color3.new(0, 255, 0)) -- لون الزر أخضر
+openButton.Position = UDim2.new(0, 10, 0, 10)
+openButton.Text = "فتح"
+
+-- إضافة دالة لعند النقر على زر الـ Open
+openButton.MouseButton1Click:Connect(function()
+    frame:TweenSize(UDim2.new(0, 300, 0, 200), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.5, true)
+end)
+
+-- إضافة دالة لتمكين التحريك بالمس
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function updateInput(input)
+    local delta = input.Position - dragStart
+    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        updateInput(input)
+    end
+end)
