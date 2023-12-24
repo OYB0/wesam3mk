@@ -1,4 +1,3 @@
--- تعريف الـ GUI
 local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.Name = "CustomGUI"
@@ -45,7 +44,9 @@ setupButton(resetButton, guiSettings.buttonColor)
 
 -- إضافة دالة لعند النقر على زر الـ Reset
 resetButton.MouseButton1Click:Connect(function()
-    resetCharacter()
+    if gui and gui.Parent then
+        resetCharacter()
+    end
 end)
 
 -- إضافة زر الـ X لإغلاق الـ GUI
@@ -107,4 +108,13 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
     if input == dragInput and dragging then
         updateInput(input)
     end
+end)
+
+-- إضافة دالة لعند تغيير الشخصية
+player.CharacterAdded:Connect(function(character)
+    character:WaitForChild("Humanoid").Died:Connect(function()
+        if gui and gui.Parent then
+            gui:Destroy()
+        end
+    end)
 end)
