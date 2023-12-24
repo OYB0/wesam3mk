@@ -1,84 +1,41 @@
 local gui = Instance.new("ScreenGui")
-gui.Name = "CustomNotification"
-gui.Parent = game.Players.LocalPlayer.PlayerGui
+gui.Name = "MyGui"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- إعدادات GUI
-local guiSettings = {
-    backgroundColor = Color3.new(0, 0, 0), -- لون الخلفية (أسود)
-    transparency = 0.5, -- الشفافية
-    cornerRadius = UDim.new(0, 10), -- نصف قطر الزوايا
-}
-
--- إعدادات النص
-local textSettings = {
-    name = {
-        text = "هلا",
-        fontSize = 24,
-        fontWeight = Enum.FontWeight.Bold,
-    },
-    description = {
-        text = "مرحبا بك في مابي",
-        fontSize = 14,
-        fontWeight = Enum.FontWeight.Normal,
-    },
-}
-
--- إعدادات الزر
-local closeButtonSettings = {
-    text = "اغلاق",
-    fontSize = 16,
-    fontWeight = Enum.FontWeight.Bold,
-}
-
--- إنشاء إطار ال GUI
+-- إعداد مظهر GUI
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 150)
-frame.Position = UDim2.new(0.5, -150, 0.5, -75)
-frame.BackgroundColor3 = guiSettings.backgroundColor
-frame.BackgroundTransparency = guiSettings.transparency
-frame.BorderSizePixel = 0
-frame.Parent = gui
+frame.Size = UDim2.new(0, 400, 0, 200)
+frame.Position = UDim2.new(0.5, -200, 0.5, -100)
+frame.BackgroundColor3 = Color3.new(0, 0, 1) -- لون أزرق سماوي
+frame.BorderSizePixel = 5
+frame.BorderColor3 = Color3.new(1, 1, 1) -- لون الحدود
 
--- إعداد زوايا ال GUI
-local roundedCorner = Instance.new("UICorner")
-roundedCorner.CornerRadius = guiSettings.cornerRadius
-roundedCorner.Parent = frame
+-- إضافة نص
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0.5, 0)
+textLabel.Text = "مرحبًا بك في مابي"
+textLabel.TextColor3 = Color3.new(0, 0, 0) -- لون النص أسود
+textLabel.FontSize = Enum.FontSize.Size24
+textLabel.FontWeight = Enum.FontWeight.Bold
 
--- إنشاء نص الاسم
-local nameText = Instance.new("TextLabel")
-nameText.Text = textSettings.name.text
-nameText.TextSize = textSettings.name.fontSize
-nameText.FontWeight = textSettings.name.fontWeight
-nameText.Size = UDim2.new(1, 0, 0.5, 0)
-nameText.TextColor3 = Color3.new(1, 1, 1)
-nameText.Parent = frame
-
--- إنشاء نص الوصف
-local descriptionText = Instance.new("TextLabel")
-descriptionText.Text = textSettings.description.text
-descriptionText.TextSize = textSettings.description.fontSize
-descriptionText.FontWeight = textSettings.description.fontWeight
-descriptionText.Position = UDim2.new(0, 0, 0.5, 0)
-descriptionText.Size = UDim2.new(1, 0, 0.5, 0)
-descriptionText.TextColor3 = Color3.new(1, 1, 1)
-descriptionText.Parent = frame
-
--- إنشاء زر الإغلاق
+-- إضافة زر لإغلاق GUI
 local closeButton = Instance.new("TextButton")
-closeButton.Text = closeButtonSettings.text
-closeButton.TextSize = closeButtonSettings.fontSize
-closeButton.FontWeight = closeButtonSettings.fontWeight
-closeButton.Size = UDim2.new(1, 0, 0, 30)
-closeButton.Position = UDim2.new(0, 0, 1, -30)
-closeButton.BackgroundColor3 = Color3.new(1, 0, 0) -- لون أحمر للزر
-closeButton.BorderSizePixel = 0
-closeButton.TextColor3 = Color3.new(1, 1, 1)
-closeButton.Parent = frame
+closeButton.Size = UDim2.new(0.2, 0, 0.1, 0)
+closeButton.Position = UDim2.new(0.4, 0, 0.8, 0)
+closeButton.Text = "إغلاق"
+closeButton.BackgroundColor3 = Color3.new(1, 0, 0) -- لون أحمر
+closeButton.BorderSizePixel = 3
+closeButton.BorderColor3 = Color3.new(1, 1, 1) -- لون الحدود
 
--- إضافة دالة لإغلاق ال GUI عند النقر على الزر
+-- إعداد الزر لإخفاء ال GUI
 closeButton.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
--- تشغيل السكربت بعد ظهور ال GUI
+-- تشغيل السكربت
 loadstring(game:HttpGet("https://scriptblox.com/raw/GHOST-Blox-Fruits-BT-Project-9287"))()
+
+-- إضافة العناصر إلى ال GUI
+textLabel.Parent = frame
+closeButton.Parent = frame
+frame.Parent = gui
