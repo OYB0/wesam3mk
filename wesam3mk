@@ -1,0 +1,35 @@
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer.PlayerGui
+
+-- إنشاء إطار
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BorderSizePixel = 2
+frame.Parent = screenGui
+
+-- إنشاء زر
+local button = Instance.new("TextButton")
+button.Text = "هلا"
+button.Size = UDim2.new(0, 100, 0, 50)
+button.Position = UDim2.new(0.5, -50, 0.75, -25)
+button.Parent = frame
+
+-- تحديد وظيفة للزر
+button.MouseButton1Click:Connect(function()
+    -- رابط gamepass الذي تريد عرضه
+    local gamepassLink = "https://www.roblox.com/game-pass/239977094/hi-bro"
+    
+    -- عرض الرابط في الإطار
+    local linkLabel = Instance.new("TextLabel")
+    linkLabel.Text = gamepassLink
+    linkLabel.Size = UDim2.new(1, 0, 1, 0)
+    linkLabel.TextScaled = true
+    linkLabel.TextWrapped = true
+    linkLabel.Parent = frame
+
+    -- بعد ثوانٍ قليلة، قم بإخفاء الرابط
+    wait(5)
+    linkLabel:Destroy()
+end)
