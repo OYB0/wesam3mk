@@ -9,7 +9,7 @@ local function createNotification(title, description)
     notificationFrame.BackgroundTransparency = 0.5
     notificationFrame.BackgroundColor3 = Color3.new(0, 0, 0)
     notificationFrame.BorderSizePixel = 0
-    notificationFrame.Parent = player.PlayerGui
+    notificationFrame.Parent = game.StarterGui
 
     -- إنشاء عنوان الإشعار
     local titleTextLabel = Instance.new("TextLabel")
